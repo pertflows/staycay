@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND TOKENS — update these when the designer delivers
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  /* Colors */
+  --color-navy:     #1B2D3D;
+  --color-coral:    #C4704B;
+  --color-gold:     #D4A853;
+  --color-sand:     #E8DDD3;
+  --color-cream:    #FAF7F2;
+  --color-charcoal: #2D2D2D;
+  --color-muted:    #8B8B8B;
+  --color-sage:     #7A8E7A;
+
+  /* Fonts — swap these with Britney's picks */
+  --font-display: "Playfair Display", serif;
+  --font-body:    "DM Sans", sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-body text-brand-charcoal bg-brand-cream;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--color-coral);
+    color: white;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL-TRIGGERED ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════════════════════════ */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4
+           bg-brand-coral text-white font-body font-semibold text-sm
+           tracking-wider uppercase
+           rounded-brand
+           transition-all duration-300 ease-out;
+  }
+  .btn-primary:hover {
+    @apply scale-[1.02] shadow-lg;
+    background: color-mix(in srgb, var(--color-coral) 85%, black);
+  }
+  .btn-primary:active {
+    @apply scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-8 py-4
+           border-2 border-brand-navy text-brand-navy
+           font-body font-semibold text-sm tracking-wider uppercase
+           rounded-brand
+           transition-all duration-300 ease-out;
+  }
+  .btn-outline:hover {
+    @apply bg-brand-navy text-white;
+  }
+
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-20 xl:px-28;
+  }
+
+  .section-gap {
+    padding-top: clamp(5rem, 10vw, 8rem);
+    padding-bottom: clamp(5rem, 10vw, 8rem);
+  }
+
+  .card-elevated {
+    @apply bg-white rounded-brand p-8
+           shadow-[0_4px_24px_rgba(0,0,0,0.06)]
+           transition-all duration-300;
+  }
+  .card-elevated:hover {
+    @apply shadow-[0_8px_40px_rgba(0,0,0,0.1)] -translate-y-1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CUSTOM SCROLLBAR
+   ═══════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sand);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NOISE TEXTURE OVERLAY (subtle grain for depth)
+   ═══════════════════════════════════════════════════════════════ */
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GRADIENT DIVIDER
+   ═══════════════════════════════════════════════════════════════ */
+.gradient-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-sand) 20%,
+    var(--color-coral) 50%,
+    var(--color-sand) 80%,
+    transparent
+  );
+}
