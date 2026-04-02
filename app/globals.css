@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════
-   BRAND TOKENS — update these when the designer delivers
+   BRAND TOKENS
    ═══════════════════════════════════════════════════════════════ */
 :root {
-  /* Colors */
-  --color-navy:     #1B2D3D;
-  --color-coral:    #C4704B;
-  --color-gold:     #D4A853;
-  --color-sand:     #E8DDD3;
-  --color-cream:    #FAF7F2;
-  --color-charcoal: #2D2D2D;
-  --color-muted:    #8B8B8B;
-  --color-sage:     #7A8E7A;
+  /* Colors — premium at-home luxury palette */
+  --color-navy:       #0C1A2E;   /* deep midnight navy */
+  --color-obsidian:   #060D18;   /* near-black for dramatic sections */
+  --color-coral:      #B8694A;   /* warm terracotta */
+  --color-gold:       #C9A96E;   /* champagne gold */
+  --color-gold-light: #E8CEAA;   /* soft champagne */
+  --color-sand:       #EBE0D5;   /* warm sand */
+  --color-cream:      #FAF8F4;   /* rich cream */
+  --color-charcoal:   #1C1C1C;   /* deep charcoal */
+  --color-muted:      #8A8A8A;   /* medium gray */
+  --color-sage:       #7A8E7A;   /* muted green */
 
-  /* Fonts — swap these with Britney's picks */
-  --font-display: "Playfair Display", serif;
+  /* Fonts */
+  --font-display: "Cormorant Garamond", "Playfair Display", serif;
   --font-body:    "DM Sans", sans-serif;
 }
 
@@ -38,8 +40,8 @@
   }
 
   ::selection {
-    background: var(--color-coral);
-    color: white;
+    background: var(--color-gold);
+    color: var(--color-obsidian);
   }
 }
 
@@ -48,8 +50,9 @@
    ═══════════════════════════════════════════════════════════════ */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.visible {
@@ -58,38 +61,59 @@
 }
 
 .reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.34s; }
+.reveal-delay-4 { transition-delay: 0.46s; }
+.reveal-delay-5 { transition-delay: 0.58s; }
 
 /* ═══════════════════════════════════════════════════════════════
    COMPONENTS
    ═══════════════════════════════════════════════════════════════ */
 @layer components {
+  /* Primary CTA — champagne gold */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-4
-           bg-brand-coral text-white font-body font-semibold text-sm
-           tracking-wider uppercase
-           rounded-brand
-           transition-all duration-300 ease-out;
+    @apply inline-flex items-center justify-center px-9 py-4
+           bg-brand-gold text-brand-obsidian
+           font-body font-semibold text-xs
+           tracking-[0.18em] uppercase
+           rounded-none
+           transition-all duration-400 ease-out
+           relative overflow-hidden;
+  }
+  .btn-primary::after {
+    content: "";
+    @apply absolute inset-0 bg-white/0 transition-all duration-300;
   }
   .btn-primary:hover {
-    @apply scale-[1.02] shadow-lg;
-    background: color-mix(in srgb, var(--color-coral) 85%, black);
+    @apply scale-[1.015] shadow-[0_8px_40px_rgba(201,169,110,0.35)];
+    background: color-mix(in srgb, var(--color-gold) 88%, white);
   }
   .btn-primary:active {
-    @apply scale-[0.98];
+    @apply scale-[0.985];
   }
 
+  /* Secondary outline button */
   .btn-outline {
-    @apply inline-flex items-center justify-center px-8 py-4
-           border-2 border-brand-navy text-brand-navy
-           font-body font-semibold text-sm tracking-wider uppercase
-           rounded-brand
+    @apply inline-flex items-center justify-center px-9 py-4
+           border border-brand-navy text-brand-navy
+           font-body font-semibold text-xs tracking-[0.18em] uppercase
+           rounded-none
            transition-all duration-300 ease-out;
   }
   .btn-outline:hover {
-    @apply bg-brand-navy text-white;
+    @apply bg-brand-navy text-brand-cream;
+  }
+
+  /* Ghost button for dark backgrounds */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-9 py-4
+           border border-white/40 text-white
+           font-body font-semibold text-xs tracking-[0.18em] uppercase
+           rounded-none
+           transition-all duration-300 ease-out;
+  }
+  .btn-ghost:hover {
+    @apply bg-white/10 border-white/70;
   }
 
   .section-padding {
@@ -97,45 +121,47 @@
   }
 
   .section-gap {
-    padding-top: clamp(5rem, 10vw, 8rem);
-    padding-bottom: clamp(5rem, 10vw, 8rem);
+    padding-top: clamp(5rem, 10vw, 9rem);
+    padding-bottom: clamp(5rem, 10vw, 9rem);
   }
 
+  /* Luxury card — subtle depth */
   .card-elevated {
-    @apply bg-white rounded-brand p-8
-           shadow-[0_4px_24px_rgba(0,0,0,0.06)]
-           transition-all duration-300;
+    @apply bg-white p-10
+           shadow-[0_2px_24px_rgba(0,0,0,0.05)]
+           transition-all duration-500;
   }
   .card-elevated:hover {
-    @apply shadow-[0_8px_40px_rgba(0,0,0,0.1)] -translate-y-1;
+    @apply shadow-[0_12px_60px_rgba(0,0,0,0.09)] -translate-y-1;
+  }
+
+  /* Luxury tag / eyebrow label */
+  .eyebrow {
+    @apply font-body text-brand-gold text-xs uppercase tracking-[0.25em];
+  }
+
+  /* Thin decorative rule */
+  .ornament-line {
+    @apply h-px w-16 bg-brand-gold mx-auto;
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════
    CUSTOM SCROLLBAR
    ═══════════════════════════════════════════════════════════════ */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-cream);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-sand);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-coral); }
 
 /* ═══════════════════════════════════════════════════════════════
-   NOISE TEXTURE OVERLAY (subtle grain for depth)
+   NOISE TEXTURE OVERLAY
    ═══════════════════════════════════════════════════════════════ */
 .noise-overlay::before {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.03;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
@@ -149,9 +175,49 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--color-sand) 20%,
-    var(--color-coral) 50%,
-    var(--color-sand) 80%,
+    var(--color-gold-light) 25%,
+    var(--color-gold) 50%,
+    var(--color-gold-light) 75%,
     transparent
   );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LUXURY HERO GRADIENT
+   ═══════════════════════════════════════════════════════════════ */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,110,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 20% 80%, rgba(184,105,74,0.06) 0%, transparent 50%),
+    linear-gradient(160deg, var(--color-obsidian) 0%, var(--color-navy) 55%, #122033 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AMBIENT GLOW (decorative)
+   ═══════════════════════════════════════════════════════════════ */
+.glow-gold {
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,169,110,0.15) 0%, transparent 70%);
+}
+.glow-coral {
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(184,105,74,0.10) 0%, transparent 70%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHIMMER ANIMATION for premium borders
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-border {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-light),
+    var(--color-gold),
+    var(--color-gold-light),
+    var(--color-gold)
+  );
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
 }
