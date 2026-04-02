@@ -105,7 +105,7 @@ export default function Navbar() {
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className={`block h-px transition-all duration-400 ${
+                className={`block h-px transition-all duration-300 ${
                   mobileOpen || scrolled ? "bg-brand-navy" : "bg-white"
                 } ${
                   i === 0 ? `w-6 ${mobileOpen ? "rotate-45 translate-y-[9px]" : ""}` :

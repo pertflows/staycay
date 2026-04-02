@@ -392,7 +392,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {TESTIMONIALS.map((t, i) => (
               <div key={t.name} className={`reveal reveal-delay-${i + 1} relative p-10 border border-brand-sand bg-brand-cream
-                                            transition-all duration-400 hover:border-brand-gold/40 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)]`}>
+                                            transition-all duration-300 hover:border-brand-gold/40 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)]`}>
                 {/* Large quote mark */}
                 <div className="font-display text-7xl text-brand-gold/20 leading-none mb-4 -mt-2"
                      style={{ fontWeight: 300 }}>
