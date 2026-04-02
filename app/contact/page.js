@@ -11,13 +11,13 @@ const INQUIRY_TYPES = [
 ];
 
 const EXPERIENCE_TYPES = [
-  "Beach & Island",
-  "City & Culture",
-  "Wellness & Spa",
-  "Adventure & Outdoor",
-  "Romance & Celebrations",
-  "Family Getaway",
-  "Custom / Not Sure Yet",
+  "Private Chef Dining",
+  "In-Home Spa & Wellness",
+  "Romance & Date Night",
+  "Luxury Celebration Setup",
+  "Intimate Gathering / Dinner Party",
+  "Wellness & Mindfulness Session",
+  "Something Custom / Not Sure Yet",
 ];
 
 export default function ContactPage() {
@@ -35,20 +35,25 @@ export default function ContactPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative pt-40 pb-20 section-padding overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/5 to-transparent" />
+      <section className="relative pt-44 pb-24 section-padding overflow-hidden hero-gradient">
+        <div className="absolute bottom-0 right-[20%] w-[400px] h-[400px] rounded-full
+                        bg-brand-gold/5 blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <span className="font-body text-brand-coral text-sm uppercase tracking-[0.15em] animate-fade-in">
-            Get in Touch
-          </span>
-          <h1 className="font-display text-display-xl text-brand-navy mt-3 mb-6 animate-fade-up">
-            Let&rsquo;s Start <span className="italic text-brand-coral">Planning</span>
+          <div className="flex items-center gap-4 mb-8 animate-fade-in">
+            <div className="h-px w-8 bg-brand-gold" />
+            <span className="font-body text-brand-gold text-xs uppercase tracking-[0.3em]">
+              Get in Touch
+            </span>
+          </div>
+          <h1 className="font-display text-display-xl text-white mb-7 animate-fade-up"
+              style={{ fontWeight: 300 }}>
+            Let&rsquo;s Design{" "}
+            <em className="text-brand-gold">Your Experience</em>
           </h1>
-          <p className="font-body text-brand-muted text-lg max-w-2xl leading-relaxed animate-fade-up"
+          <p className="font-body text-white/55 text-lg max-w-2xl leading-relaxed animate-fade-up"
              style={{ animationDelay: "0.15s" }}>
-            Whether you&rsquo;re ready to book your next trip or just have a
-            question, we&rsquo;d love to hear from you. Fill out the form below
-            and our team will get back to you within 24 hours.
+            Tell us what you have in mind and we&rsquo;ll take it from there.
+            Our concierge team responds within 24 hours.
           </p>
         </div>
       </section>
@@ -71,8 +76,8 @@ export default function ContactPage() {
                     Message Sent!
                   </h3>
                   <p className="text-brand-muted max-w-md mx-auto">
-                    Thanks for reaching out. Our team will review your inquiry and
-                    get back to you within 24 hours.
+                    Thank you for reaching out. Our concierge team will review your
+                    experience request and get back to you within 24 hours.
                   </p>
                 </div>
               ) : (
@@ -170,10 +175,10 @@ export default function ContactPage() {
 
                   {/* ── Conditional Intake Fields (show if booking) ── */}
                   {isBooking && (
-                    <div className="space-y-6 p-6 bg-brand-sand/20 rounded-brand border border-brand-sand/40
+                    <div className="space-y-6 p-6 bg-brand-sand/20 border border-brand-sand/60
                                     animate-scale-in">
-                      <p className="font-body text-sm text-brand-navy font-semibold">
-                        Tell us about your dream trip
+                      <p className="font-body text-xs text-brand-gold font-semibold uppercase tracking-[0.15em]">
+                        Tell us about your experience
                       </p>
 
                       {/* Experience type */}
@@ -201,7 +206,7 @@ export default function ContactPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                           <label htmlFor="startDate" className="block font-body text-sm text-brand-charcoal mb-2">
-                            Preferred start date
+                            Preferred date
                           </label>
                           <input
                             id="startDate"
@@ -214,7 +219,7 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <label htmlFor="endDate" className="block font-body text-sm text-brand-charcoal mb-2">
-                            Preferred end date
+                            Alternate date (optional)
                           </label>
                           <input
                             id="endDate"
@@ -230,7 +235,7 @@ export default function ContactPage() {
                       {/* Group size */}
                       <div>
                         <label htmlFor="groupSize" className="block font-body text-sm text-brand-charcoal mb-2">
-                          How many travelers?
+                          How many guests?
                         </label>
                         <input
                           id="groupSize"
@@ -279,7 +284,7 @@ export default function ContactPage() {
                                      bg-white text-brand-charcoal placeholder:text-brand-muted/50
                                      focus:outline-none focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/20
                                      transition-all duration-300"
-                          placeholder="e.g., spa day, private dining, boat tour..."
+                          placeholder="e.g., rose petal setup, wine pairing, sound bath..."
                         />
                       </div>
                     </div>
@@ -346,11 +351,11 @@ export default function ContactPage() {
               </div>
 
               {/* Member CTA */}
-              <div className="bg-brand-navy rounded-brand p-8 text-white">
-                <h3 className="font-display text-xl mb-3">Already a Member?</h3>
-                <p className="text-white/60 text-sm mb-6">
+              <div className="bg-brand-navy p-8 text-white">
+                <h3 className="font-display text-xl mb-3" style={{ fontWeight: 400 }}>Already a Member?</h3>
+                <p className="text-white/55 text-sm mb-6 leading-relaxed">
                   Members enjoy priority response times and waived coordination
-                  fees on all bookings.
+                  fees on every experience.
                 </p>
                 <a href="/membership" className="inline-flex items-center gap-2 text-brand-coral
                                                  font-body font-semibold text-sm hover:gap-3 transition-all duration-300">

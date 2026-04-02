@@ -9,19 +9,21 @@ module.exports = {
       /* ── Brand tokens ── swap these when Britney's designer delivers ── */
       colors: {
         brand: {
-          navy:      "var(--color-navy)",
-          coral:     "var(--color-coral)",
-          gold:      "var(--color-gold)",
-          sand:      "var(--color-sand)",
-          cream:     "var(--color-cream)",
-          charcoal:  "var(--color-charcoal)",
-          muted:     "var(--color-muted)",
-          sage:      "var(--color-sage)",
+          navy:       "var(--color-navy)",
+          obsidian:   "var(--color-obsidian)",
+          coral:      "var(--color-coral)",
+          gold:       "var(--color-gold)",
+          "gold-light":"var(--color-gold-light)",
+          sand:       "var(--color-sand)",
+          cream:      "var(--color-cream)",
+          charcoal:   "var(--color-charcoal)",
+          muted:      "var(--color-muted)",
+          sage:       "var(--color-sage)",
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "serif"],
-        body:    ["var(--font-body)", "sans-serif"],
+        display: ["Cormorant Garamond", "Playfair Display", "serif"],
+        body:    ["DM Sans", "sans-serif"],
       },
       fontSize: {
         "display-xl": ["clamp(3rem, 6vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
