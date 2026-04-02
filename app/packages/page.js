@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { RevealGroup } from "@/components/useReveal";
 
@@ -8,36 +9,42 @@ const EXPERIENCES = [
     tag: "Culinary",
     desc: "A hand-selected chef brings your dream menu to life in your home. From intimate dinners for two to elaborate multi-course feasts, our culinary artists handle everything — ingredients, equipment, plating, and cleanup.",
     offerings: ["Custom menu consultation", "Wine & cocktail pairings", "Full table service", "Post-dining cleanup"],
+    detail: "Our private chefs are trained culinary professionals who design a personalized menu around your dietary preferences, occasion, and vision. They arrive with all equipment and premium ingredients, cook in your kitchen, plate beautifully, and leave your space immaculate. Vendor partners include personal chefs, sommeliers, and specialty dessert & pastry artists.",
   },
   {
     name: "In-Home Spa Rituals",
     tag: "Wellness",
     desc: "Licensed massage therapists, estheticians, and wellness practitioners arrive with professional-grade equipment to deliver the complete spa experience in your space. Relaxation, redefined.",
     offerings: ["Swedish & deep tissue massage", "Custom facials & skin treatments", "Aromatherapy bath rituals", "Couples & group sessions"],
+    detail: "All practitioners in our network are fully licensed, insured, and experienced in luxury spa environments. Sessions are fully customizable — from 60-minute solo massages to full-day spa days for groups. We source therapists, estheticians, nail technicians, and lash artists who travel to you with all professional equipment.",
   },
   {
     name: "Romance & Date Nights",
     tag: "Romantic",
     desc: "Transform any room into an unforgettable backdrop for a romantic evening. Our stylists curate every sensory detail — from the florals and candlelight to the champagne and custom playlist.",
     offerings: ["Floral & candle styling", "Champagne & charcuterie setup", "Custom ambiance curation", "Private chef add-on available"],
+    detail: "Our romance stylists create immersive environments — think rose petals, pillar candles, curated tablescapes, ambient lighting, and personalized touches that reflect your story. Popular for date nights, Valentine's Day, proposals, and anniversary surprises. Pair with a private chef for a fully orchestrated evening from start to finish.",
   },
   {
     name: "Luxury Celebrations",
     tag: "Milestones",
     desc: "Birthdays, anniversaries, proposals, and milestone moments deserve extraordinary staging. We design bespoke celebration setups that make every detail intentional and every memory lasting.",
     offerings: ["Proposal setups", "Birthday & anniversary design", "Custom balloon & floral installations", "Photography-ready styling"],
+    detail: "Every celebration setup is designed to be photograph-worthy and deeply personal. We work with florists, balloon artists, custom signage designers, and event stylists who understand luxury aesthetics. Tell us the story — we'll build the scene. Add-ons include on-site photography coordination, custom cakes, and champagne tower service.",
   },
   {
     name: "Intimate Gatherings",
     tag: "Entertaining",
     desc: "Host with confidence. Whether it's a curated dinner party for twelve or a luxurious Sunday brunch for four, we coordinate every element so you can be fully present with your guests.",
     offerings: ["Full-service dinner parties", "Luxury brunch experiences", "Cocktail hour setups", "Private event coordination"],
+    detail: "We take the stress out of hosting by coordinating every vendor, timeline, and setup detail. Our gatherings include table styling, service staff, catered menus, and full cleanup. Vendor partners include personal chefs, private bartenders, event coordinators, and floral stylists — all working together so you can enjoy your own event.",
   },
   {
     name: "Wellness & Mindfulness",
     tag: "Mindful Living",
     desc: "Invite stillness and intention into your home. Our certified practitioners guide private yoga flows, sound baths, breathwork, reiki sessions, and meditation journeys tailored to your needs.",
     offerings: ["Private yoga & movement sessions", "Sound bath ceremonies", "Reiki & energy work", "Guided meditation & breathwork"],
+    detail: "Wellness experiences are fully customizable for individuals, couples, or groups. Whether you want a restorative yin yoga flow, a deeply meditative sound bath with crystal bowls, or an energy-clearing reiki session, our certified practitioners bring everything needed. Sessions can be combined and paired with in-home spa rituals for a full wellness day.",
   },
 ];
 
@@ -64,7 +71,66 @@ const PROCESS_STEPS = [
   },
 ];
 
+function ExperienceAccordion({ exp, isOpen, onToggle }) {
+  return (
+    <div className={`border-b border-brand-sand transition-colors duration-300 ${isOpen ? "border-brand-gold/30" : ""}`}>
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between py-7 text-left group"
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-center gap-5">
+          <span className={`font-body text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 border transition-colors duration-300 ${
+            isOpen ? "border-brand-gold text-brand-gold" : "border-brand-sand text-brand-muted"
+          }`}>
+            {exp.tag}
+          </span>
+          <h3 className={`font-display text-display-sm transition-colors duration-300 ${
+            isOpen ? "text-brand-coral" : "text-brand-navy group-hover:text-brand-coral"
+          }`} style={{ fontWeight: 400 }}>
+            {exp.name}
+          </h3>
+        </div>
+        <div className={`shrink-0 w-8 h-8 border flex items-center justify-center ml-4
+                         transition-all duration-300 ${
+          isOpen ? "border-brand-gold bg-brand-gold text-brand-obsidian rotate-45" : "border-brand-sand text-brand-muted"
+        }`}>
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </div>
+      </button>
+
+      <div className={`overflow-hidden transition-all duration-500 ${isOpen ? "max-h-[600px] pb-8" : "max-h-0"}`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pr-4">
+          <div>
+            <p className="text-brand-muted leading-relaxed text-sm mb-6">{exp.detail}</p>
+            <Link href="/contact" className="btn-primary text-xs">
+              Book This Experience
+            </Link>
+          </div>
+          <div>
+            <p className="font-body font-semibold text-brand-navy text-xs uppercase tracking-[0.15em] mb-5">
+              What&rsquo;s Included
+            </p>
+            <ul className="space-y-3">
+              {exp.offerings.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <div className="w-1 h-1 rounded-full bg-brand-gold mt-2 shrink-0" />
+                  <span className="text-sm text-brand-charcoal/70">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PackagesPage() {
+  const [openExp, setOpenExp] = useState(null);
+
   return (
     <>
       {/* ── Hero ── */}
@@ -91,50 +157,28 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      {/* ── Experience Categories ── */}
+      {/* ── Experience Categories — Expandable Accordion ── */}
       <section className="section-gap section-padding bg-brand-cream">
-        <RevealGroup className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-brand-sand">
+        <RevealGroup className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="reveal eyebrow">What We Offer</span>
+            <h2 className="reveal reveal-delay-1 font-display text-display-lg text-brand-navy mt-3"
+                style={{ fontWeight: 400 }}>
+              Browse Our Experiences
+            </h2>
+            <p className="reveal reveal-delay-2 text-brand-muted text-sm mt-4 max-w-xl mx-auto">
+              Click any experience to expand the full details, inclusions, and vendor overview.
+            </p>
+          </div>
+
+          <div className="reveal reveal-delay-2 border-t border-brand-sand">
             {EXPERIENCES.map((exp, i) => (
-              <div
+              <ExperienceAccordion
                 key={exp.name}
-                className={`reveal reveal-delay-${(i % 3) + 1} group bg-brand-cream p-10 md:p-12
-                             transition-all duration-500 cursor-pointer
-                             hover:bg-white hover:shadow-[inset_0_0_0_1px_rgba(201,169,110,0.3)]`}
-              >
-                {/* Tag */}
-                <span className="inline-block font-body text-[10px] uppercase tracking-[0.25em] text-brand-gold mb-6 px-3 py-1.5 border border-brand-gold/30">
-                  {exp.tag}
-                </span>
-
-                <h3 className="font-display text-display-sm text-brand-navy mb-4 group-hover:text-brand-coral transition-colors duration-300"
-                    style={{ fontWeight: 400 }}>
-                  {exp.name}
-                </h3>
-                <p className="font-body text-brand-muted text-sm leading-relaxed mb-8">
-                  {exp.desc}
-                </p>
-
-                {/* Offerings list */}
-                <ul className="space-y-2.5 mb-8">
-                  {exp.offerings.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-brand-gold mt-2 shrink-0" />
-                      <span className="text-xs font-body text-brand-charcoal/65">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA arrow */}
-                <div className="flex items-center gap-2 text-brand-navy font-body text-xs tracking-[0.15em] uppercase
-                                opacity-0 group-hover:opacity-100 transition-all duration-300
-                                -translate-x-1 group-hover:translate-x-0">
-                  Enquire
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                  </svg>
-                </div>
-              </div>
+                exp={exp}
+                isOpen={openExp === i}
+                onToggle={() => setOpenExp(openExp === i ? null : i)}
+              />
             ))}
           </div>
         </RevealGroup>
